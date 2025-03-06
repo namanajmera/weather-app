@@ -1,3 +1,4 @@
 import CountryWeekData from "./CountryWeekData";
+import CountryCurrentState from "./CountryCurrentState";
 
-export { CountryWeekData }
+export { CountryWeekData, CountryCurrentState }
