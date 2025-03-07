@@ -1,4 +1,4 @@
-import { CountryCurrentState, CountryWeekData, CurrentLocationWeather } from "./components";
+import { CountryCurrentState, CountryWeekData, CurrentLocationWeather, OtherCountryState } from "./components";
 
 export default function Home() {
 
@@ -8,6 +8,7 @@ export default function Home() {
         <CountryWeekData />
         <CountryCurrentState />
         <CurrentLocationWeather />
+        <OtherCountryState />
       </div>
     </>
   );
