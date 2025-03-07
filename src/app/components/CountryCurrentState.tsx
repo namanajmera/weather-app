@@ -34,7 +34,7 @@ const CountryCurrentState = () => {
         }
     ]
     return (
-        <div className="flex flex-wrap space-x-5 space-y-5 justify-center">
+        <div className="flex flex-wrap space-x-5 space-y-5 justify-center lg:flex-nowrap lg:space-x-7">
             {countryData && countryData.map((ele) => (
                 <div className={`border border-white/15 rounded-xl p-5 w-[12.38rem] h-[15.12rem] backdrop-blur-[80px] shadow-xl shadow-black/20 bg-gradient-to-b flex flex-col justify-between ${ele.backgroundClass}`} key={ele.id}>
                     <div className="flex justify-between items-center">
