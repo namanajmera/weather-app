@@ -3,6 +3,7 @@ import CountryCurrentState from "./CountryCurrentState";
 import CurrentLocationWeather from "./CurrentLocationWeather";
 import OtherCountryState from "./OtherCountryState";
 import HourWiseWeather from "./HourWiseWeather";
+import DayWiseWeather from "./DayWiseWeather";
 
 export {
     CountryWeekData,
@@ -10,4 +11,5 @@ export {
     CurrentLocationWeather,
     OtherCountryState,
     HourWiseWeather,
+    DayWiseWeather,
 };

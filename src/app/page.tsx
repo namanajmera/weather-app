@@ -4,6 +4,7 @@ import {
   CurrentLocationWeather,
   HourWiseWeather,
   OtherCountryState,
+  DayWiseWeather,
 } from "./components";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
         <CurrentLocationWeather />
         <OtherCountryState />
         <HourWiseWeather />
+        <DayWiseWeather />
       </div>
     </>
   );
