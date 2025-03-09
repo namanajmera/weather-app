@@ -1,5 +1,6 @@
 
 import { LocationState } from "@/models/locationModel";
+import { HourState } from "@/models/weekData";
 import { get5DaysWeather } from "@/utils/apis";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -8,7 +9,7 @@ type Props = {
     location: LocationState;
 };
 const HourWiseWeather = ({ location }: Props) => {
-    const [hourData, setHourData] = useState();
+    const [hourData, setHourData] = useState<HourState[]>();
 
     const getHourlyWeatherData = () => {
         get5DaysWeather(location.city)
@@ -40,7 +41,7 @@ const HourWiseWeather = ({ location }: Props) => {
 
     useEffect(() => {
         getHourlyWeatherData();
-    }, []);
+    });
 
     const getImageURL = (descripition: string) => {
         if (["clear sky"].includes(descripition)) {

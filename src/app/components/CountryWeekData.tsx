@@ -28,7 +28,7 @@ const CountryWeekData = () => {
 
     useEffect(() => {
         get5DaysWeatherData("Mumbai");
-    }, [setWeekData]);
+    });
 
     const get5DaysWeatherData = (place: string) => {
         setCurrentSelected(place);
