@@ -27,7 +27,7 @@ const Home = () => {
                 <OtherCountryState />
                 <CurrentLocationWeather location={location} />
               </div>
-              <HourWiseWeather />
+              <HourWiseWeather location={location} />
             </div>
             <DayWiseWeather />
           </div>
