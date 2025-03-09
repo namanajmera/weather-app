@@ -3,7 +3,7 @@
 import { WeekState } from "@/models/weekData";
 import { get5DaysWeather } from "@/utils/apis";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const CountryWeekData = () => {
     const top3WeatherData = [
@@ -26,35 +26,29 @@ const CountryWeekData = () => {
     const [weekData, setWeekData] = useState<WeekState[]>();
     const [currentSelected, setCurrentSelected] = useState<string>("Mumbai");
 
-    useEffect(() => {
-        get5DaysWeatherData("Mumbai");
-    });
-
-    const get5DaysWeatherData = (place: string) => {
+    const get5DaysWeatherData = useCallback((place: string) => {
         setCurrentSelected(place);
         get5DaysWeather(place)
             .then((response) => {
-                const forecast = response.data.list.filter((ele: any) => ele.dt_txt.includes("12:00:00")).slice(0, 4);
-                const data = forecast.map((e: any, index: number) => ({
-                    id: index + 1, // Unique ID for each day
-                    day: new Date(e.dt_txt).toLocaleDateString("en-US", {
-                        weekday: "short",
-                    }), // "Wed"
-                    date: new Date(e.dt_txt).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                    }), // "Mar 9"
-                    imagePath: getImageURL(e.weather[0].description), // Weather icon path
-                    weather: e.weather[0].description, // Weather condition
-                    temperature: `${Math.round(e.main.temp_min - 273.15)}°C`, // Convert Kelvin to Celsius
-                    airQuality: `AQI ${Math.floor(Math.random() * 50) + 10}`, // Mock AQI (replace with actual AQI API)
+                const forecast = response.data.list.filter((ele) =>
+                    ele.dt_txt.includes("12:00:00")
+                ).slice(0, 4); // Select only 4 items
+
+                const data = forecast.map((e, index) => ({
+                    id: index + 1,
+                    day: new Date(e.dt_txt).toLocaleDateString("en-US", { weekday: "short" }),
+                    date: new Date(e.dt_txt).toLocaleDateString("en-US", { month: "short", day: "numeric" }),
+                    imagePath: getImageURL(e.weather[0].description),
+                    weather: e.weather[0].description,
+                    temperature: `${Math.round(e.main.temp_min - 273.15)}°C`,
+                    airQuality: `AQI ${Math.floor(Math.random() * 50) + 10}`,
                 }));
                 setWeekData(data);
             })
             .catch((error) => {
                 console.error("Error fetching weather data:", error);
             });
-    };
+    }, [setWeekData]);
 
     const getImageURL = (descripition: string) => {
         if (["clear sky"].includes(descripition)) {
@@ -63,6 +57,10 @@ const CountryWeekData = () => {
             return "/weather/04_sun_cloudy_color.svg";
         }
     };
+
+    useEffect(() => {
+        get5DaysWeatherData("Mumbai");
+    }, [get5DaysWeatherData]);
 
     const containerClasses =
         "font-extralight text-[0.75rem] leading-[133%] text-white/88 text-center";
