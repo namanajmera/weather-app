@@ -3,7 +3,7 @@ import { LocationState } from "@/models/locationModel";
 import { HourState } from "@/models/weekData";
 import { get5DaysWeather } from "@/utils/apis";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 type Props = {
     location: LocationState;
@@ -11,7 +11,7 @@ type Props = {
 const HourWiseWeather = ({ location }: Props) => {
     const [hourData, setHourData] = useState<HourState[]>();
 
-    const getHourlyWeatherData = () => {
+    const getHourlyWeatherData = useCallback(() => {
         get5DaysWeather(location.city)
             .then((response) => {
                 const today = new Date().toISOString().split("T")[0]; // Format: YYYY-MM-DD
@@ -37,11 +37,11 @@ const HourWiseWeather = ({ location }: Props) => {
             .catch((error) => {
                 console.error("Error fetching hourly weather data:", error);
             });
-    };
+    }, [location.city, setHourData]);
 
     useEffect(() => {
         getHourlyWeatherData();
-    });
+    }, [getHourlyWeatherData]);
 
     const getImageURL = (descripition: string) => {
         if (["clear sky"].includes(descripition)) {
