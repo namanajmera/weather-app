@@ -11,3 +11,11 @@ export interface WeekState {
     temperature: string;
     airQuality: number;
 }
+
+export interface HourState {
+    id: number;
+    time: string;
+    imagePath: string;
+    weather: string;
+    temperature: string;
+}
