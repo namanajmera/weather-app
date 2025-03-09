@@ -1,3 +1,6 @@
+"use client"
+
+import useLocation from "@/hooks/useLocation";
 import {
   CountryCurrentState,
   CountryWeekData,
@@ -7,10 +10,12 @@ import {
   DayWiseWeather,
 } from "./components";
 
-export default function Home() {
+const Home = () => {
+  const { error, loading, location } = useLocation();
+  console.log("error, loading, location", error, loading, location);
   return (
     <>
-      <div className="flex justify-center items-center min-h-screen">
+      {!loading && <div className="flex justify-center items-center min-h-screen">
         <div className="flex justify-center items-center m-auto flex-col space-y-7 p-10">
           <div className="flex flex-col space-y-4 justify-center items-center lg:flex-row lg:space-x-6">
             <CountryWeekData />
@@ -20,14 +25,16 @@ export default function Home() {
             <div className="flex flex-col space-y-10 lg:items-start">
               <div className="flex flex-col space-y-4 justify-center items-center lg:flex-row lg:space-x-4 lg:space-y-0 lg:items-start">
                 <OtherCountryState />
-                <CurrentLocationWeather />
+                <CurrentLocationWeather location={location} />
               </div>
               <HourWiseWeather />
             </div>
             <DayWiseWeather />
           </div>
         </div>
-      </div>
+      </div>}
     </>
   );
-}
+};
+
+export default Home;

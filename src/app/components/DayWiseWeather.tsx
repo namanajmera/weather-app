@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 const DayWiseWeather = () => {
+    
     const dayWiseData = [
         {
             id: 1,
