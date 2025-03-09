@@ -12,7 +12,7 @@ const HourWiseWeather = ({ location }: Props) => {
     const [hourData, setHourData] = useState<HourState[]>();
 
     const getHourlyWeatherData = useCallback(() => {
-        get5DaysWeather(location.city)
+        get5DaysWeather(location.city ? location.city : "Mumbai")
             .then((response) => {
                 const today = new Date().toISOString().split("T")[0]; // Format: YYYY-MM-DD
 
